@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<button id="button">Send message</button>
+</body>
+<script>
+	(function() {
+
+    var wsUrl = 'wss://echo.websocket.org';
+    var ws = new WebSocket(wsUrl);
+
+    ws.onopen = function() {
+        console.log('connection open');
+    };
+
+    ws.onclose = function() {
+        console.log('connection close');
+    };
+
+    ws.onerror = function(error) {
+        console.log('error: ' + error.message);
+    };
+
+    ws.onmessage = function(event) {
+        console.log('Message: ' + event.data);
+    };
+    
+    document.getElementById('button').addEventListener('click', function() {
+        ws.send(JSON.stringify({id: 'test',c: 'ee'}));
+        
+    });
+    
+}());
+	</script>
+</html>
